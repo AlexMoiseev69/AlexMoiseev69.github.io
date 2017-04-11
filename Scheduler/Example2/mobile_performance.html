@@ -124,26 +124,33 @@
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
 
-	// add a torus knot	
-	var geometry	= new THREE.CubeGeometry(1,1,1);
-	var material	= new THREE.MeshNormalMaterial({
-		transparent : true,
-		opacity: 0.5,
-		side: THREE.DoubleSide
-	}); 
-	var mesh	= new THREE.Mesh( geometry, material );
-	mesh.position.y	= geometry.parameters.height/2
-	// markerRoot.add( mesh );
+	function loadFont() {
+		var loader = new THREE.FontLoader();
+		loader.load( '../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
+			font = response;
+			//refreshText();
+			var text1 = "Text example";
+			var textMesh1 = createText(text1);
+			markerRoot.add( textMesh1 );
+
+			var text2 = "Text new";
+			var textMesh2 = createText(text2);
+			markerRoot2.add(textMesh2)
+		} );
+	}
 	
-	var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,32,32);
-	var material	= new THREE.MeshNormalMaterial(); 
-	var mesh	= new THREE.Mesh( geometry, material );
-	mesh.position.y	= 0.5
-	// markerRoot.add( mesh );
-	
-	onRenderFcts.push(function(){
-		mesh.rotation.x += 0.1
-	})
+	var height = 1,
+				size = 40,
+				hover = 30,
+				curveSegments = 4,
+				bevelThickness = 2,
+				bevelSize = 1.5,
+				bevelSegments = 3,
+				bevelEnabled = true,
+				font = undefined,
+				fontName = "optimer", // helvetiker, optimer, gentilis, droid sans, droid serif
+				fontWeight = "bold"; // normal bold
+	loadFont();
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
@@ -171,89 +178,82 @@
 		})
 	})
 
-
-
-			function loadFont() {
-				var loader = new THREE.FontLoader();
-				loader.load( '../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
-					font = response;
-					//refreshText();
-					var textMesh = createText();
-					markerRoot.add( textMesh );
-				} );
-			}
-var text = "Text example",
-				height = 1,
-				size = 40,
-				hover = 30,
-				curveSegments = 4,
-				bevelThickness = 2,
-				bevelSize = 1.5,
-				bevelSegments = 3,
-				bevelEnabled = true,
-				font = undefined,
-				fontName = "optimer", // helvetiker, optimer, gentilis, droid sans, droid serif
-				fontWeight = "bold"; // normal bold
-loadFont();
-
-
-
-	function createText() {
+	function createText(text) {
 		
-				var textGeo = new THREE.TextGeometry( text, {
-					font: font,
-					size: size,
-					height: height,
-					curveSegments: curveSegments,
-					bevelThickness: bevelThickness,
-					bevelSize: bevelSize,
-					bevelEnabled: bevelEnabled,
-					material: 0,
-					extrudeMaterial: 1
-				});
-				textGeo.computeBoundingBox();
-				textGeo.computeVertexNormals();
-				// "fix" side normals by removing z-component of normals for side faces
-				// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)
-				if ( ! bevelEnabled ) {
-					var triangleAreaHeuristics = 0.1 * ( height * size );
-					for ( var i = 0; i < textGeo.faces.length; i ++ ) {
-						var face = textGeo.faces[ i ];
-						if ( face.materialIndex == 1 ) {
-							for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-								face.vertexNormals[ j ].z = 0;
-								face.vertexNormals[ j ].normalize();
-							}
-							var va = textGeo.vertices[ face.a ];
-							var vb = textGeo.vertices[ face.b ];
-							var vc = textGeo.vertices[ face.c ];
-							var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
-							if ( s > triangleAreaHeuristics ) {
-								for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
-									face.vertexNormals[ j ].copy( face.normal );
-								}
-							}
+		var textGeo = new THREE.TextGeometry( text, {
+			font: font,
+			size: size,
+			height: height,
+			curveSegments: curveSegments,
+			bevelThickness: bevelThickness,
+			bevelSize: bevelSize,
+			bevelEnabled: bevelEnabled,
+			material: 0,
+			extrudeMaterial: 1
+		});
+		textGeo.computeBoundingBox();
+		textGeo.computeVertexNormals();
+		// "fix" side normals by removing z-component of normals for side faces
+		// (this doesn't work well for beveled geometry as then we lose nice curvature around z-axis)
+		if ( ! bevelEnabled ) {
+			var triangleAreaHeuristics = 0.1 * ( height * size );
+			for ( var i = 0; i < textGeo.faces.length; i ++ ) {
+				var face = textGeo.faces[ i ];
+				if ( face.materialIndex == 1 ) {
+					for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+						face.vertexNormals[ j ].z = 0;
+						face.vertexNormals[ j ].normalize();
+					}
+					var va = textGeo.vertices[ face.a ];
+					var vb = textGeo.vertices[ face.b ];
+					var vc = textGeo.vertices[ face.c ];
+					var s = THREE.GeometryUtils.triangleArea( va, vb, vc );
+					if ( s > triangleAreaHeuristics ) {
+						for ( var j = 0; j < face.vertexNormals.length; j ++ ) {
+							face.vertexNormals[ j ].copy( face.normal );
 						}
 					}
 				}
-				var material = new THREE.MultiMaterial( [
-					new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
-					new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
-				] );
-				var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
-				var textMesh1 = new THREE.Mesh( textGeo, material );
-				textMesh1.position.x = -2;
-				textMesh1.position.y = 0;
-				textMesh1.position.z = 2;
-
-				textMesh1.rotation.x = Math.PI / 2;
-				textMesh1.rotation.y = Math.PI;
-				textMesh1.rotation.z = Math.PI;
-				
-				textMesh1.scale.x = 0.05;
-				textMesh1.scale.y = 0.05;
-				textMesh1.scale.z = 0.05;
-
-				return textMesh1;
 			}
-</script></body>
+		}
+		var material = new THREE.MultiMaterial( [
+			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
+			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+		] );
+		var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
+		var textMesh1 = new THREE.Mesh( textGeo, material );
+		textMesh1.position.x = -2;
+		textMesh1.position.y = 0;
+		textMesh1.position.z = 2;
+
+		textMesh1.rotation.x = Math.PI / 2;
+		textMesh1.rotation.y = Math.PI;
+		textMesh1.rotation.z = Math.PI;
+		
+		textMesh1.scale.x = 0.01;
+		textMesh1.scale.y = 0.01;
+		textMesh1.scale.z = 0.01;
+
+		return textMesh1;
+	}
+
+
+	var markerRoot2 = new THREE.Group
+	markerRoot2.name = 'marker2'
+	scene.add(markerRoot2)
+	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
+		type : 'pattern',
+		// patternUrl : '../../data/data/patt.hiro',
+		patternUrl : '../Lib/data/patt.kanji',
+	})
+
+	var text2 = "Text New";
+	// add a gizmo in the center of the marker
+	// var geometry	= new THREE.OctahedronGeometry( 0.1, 0 )
+	// var material	= new THREE.MeshNormalMaterial({
+	// 	wireframe: true
+	// }); 
+	var mesh = createText();
+	markerRoot2.add( mesh );
+</script>
+</body>
