@@ -88,7 +88,7 @@
 
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: '../Lib/data/camera_para.dat',
+		cameraParametersUrl: '../../Lib/data/camera_para.dat',
 		detectionMode: 'mono',
 		maxDetectionRate: 30,
 		canvasWidth: 80*3,
@@ -116,7 +116,7 @@
 	scene.add(markerRoot)
 	var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
 		type : 'pattern',
-		patternUrl : '../Lib/data/patt.hiro'
+		patternUrl : '../../Lib/data/patt.hiro'
 		// patternUrl : '../../data/data/patt.kanji'
 	})
 
@@ -126,7 +126,7 @@
 
 	function loadFont() {
 		var loader = new THREE.FontLoader();
-		loader.load( '../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
+		loader.load( '../../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
 			font = response;
 			//refreshText();
 			var text1 = "Text example";
