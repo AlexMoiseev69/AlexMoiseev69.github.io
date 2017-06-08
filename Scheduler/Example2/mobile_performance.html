@@ -217,8 +217,8 @@
 			}
 		}
 		var material = new THREE.MultiMaterial( [
-			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.FlatShading } ), // front
-			new THREE.MeshPhongMaterial( { color: 0xffffff, shading: THREE.SmoothShading } ) // side
+			new THREE.MeshPhongMaterial( { color: 0xff0000, shading: THREE.FlatShading } ), // front
+			new THREE.MeshPhongMaterial( { color: 0xff0000, shading: THREE.SmoothShading } ) // side
 		] );
 		var centerOffset = -0.5 * ( textGeo.boundingBox.max.x - textGeo.boundingBox.min.x );
 		var textMesh1 = new THREE.Mesh( textGeo, material );
