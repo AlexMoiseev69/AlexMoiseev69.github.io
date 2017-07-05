@@ -178,8 +178,8 @@
 		console.error( xhr );
 	};
 	var loader = new THREE.FBXLoader( manager );
-	loader.load( 'models/xsi_man_skinning.fbx', function( object ) {
-		object.scale.set(0.2, 0.2, 0.2);
+	loader.load( 'models/groot_ascii.FBX', function( object ) {
+		object.scale.set(0.02, 0.02, 0.02);
 		object.rotation.set(-Math.PI/2, 0, 0);
 
 		object.mixer = new THREE.AnimationMixer( object );
