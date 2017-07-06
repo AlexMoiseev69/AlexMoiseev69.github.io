@@ -3092,7 +3092,7 @@ THREEx.ArToolkitSource.prototype._initSourceWebcam = function(onReady) {
 			}, 1000/50);
 		}).catch(function(error) {
 			console.log("Can't access user media", error);
-			alert("Can't access user media :()");
+			// alert("Can't access user media :()");
 		});
 	}).catch(function(err) {
 		console.log(err.name + ": " + err.message);

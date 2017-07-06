@@ -5,6 +5,7 @@
 <!-- ar.js -->
 <script src="../../Lib/ar/ar.js"></script>
 <script src="../../Lib/loaders/FBXLoader.js"></script>
+<script src="../../Lib/loaders/inflate.min.js"></script> <!-- FBX -->
 <!-- <script>THREEx.ArToolkitContext.baseURL = '../../lib/ar'</script> -->
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -178,7 +179,7 @@
 		console.error( xhr );
 	};
 	var loader = new THREE.FBXLoader( manager );
-	loader.load( 'models/groot_ascii.FBX', function( object ) {
+	loader.load( 'models/groot.FBX', function( object ) {
 		object.scale.set(0.02, 0.02, 0.02);
 		object.rotation.set(-Math.PI/2, 0, 0);
 
