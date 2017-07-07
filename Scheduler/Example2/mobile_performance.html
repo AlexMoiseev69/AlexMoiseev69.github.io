@@ -1,17 +1,17 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 <!-- three.js library -->
-<script src='../Lib/utils/three.js'></script>
-<script src="../Lib/utils/stats.min.js"></script>
+<script src='../../Lib/utils/three.js'></script>
+<script src="../../Lib/utils/stats.min.js"></script>
 <!-- jsartookit -->
-<script src="../Lib/ar/artoolkit.min.js"></script>
-<script src="../Lib/ar/artoolkit.api.js"></script>
+<script src="../../Lib/ar/artoolkit.min.js"></script>
+<script src="../../Lib/ar/artoolkit.api.js"></script>
 <!-- include threex.artoolkit -->
-<script src="../Lib/ar/threex-artoolkitsource.js"></script>
-<script src="../Lib/ar/threex-artoolkitcontext.js"></script>
-<script src="../Lib/ar/threex-armarkercontrols.js"></script>
+<script src="../../Lib/ar/threex-artoolkitsource.js"></script>
+<script src="../../Lib/ar/threex-artoolkitcontext.js"></script>
+<script src="../../Lib/ar/threex-armarkercontrols.js"></script>
 
-<script src="../Lib/utils/GeometryUtils.js"></script>
+<script src="../../Lib/utils/GeometryUtils.js"></script>
 <script src="Shaders/SphereShader.js"></script>
 <script src="MultiSphere.js"></script>
 
@@ -91,7 +91,7 @@
 
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: '../Lib/data/camera_para.dat',
+		cameraParametersUrl: '../../Lib/data/camera_para.dat',
 		detectionMode: 'mono',
 		maxDetectionRate: 30,
 		canvasWidth: 80*3,
@@ -119,7 +119,7 @@
 	scene.add(markerRoot)
 	var artoolkitMarker = new THREEx.ArMarkerControls(arToolkitContext, markerRoot, {
 		type : 'pattern',
-		patternUrl : '../Lib/data/patt.hiro'
+		patternUrl : '../../Lib/data/patt.hiro'
 		// patternUrl : '../../data/data/patt.kanji'
 	})
 
@@ -129,7 +129,7 @@
 
 	function loadFont() {
 		var loader = new THREE.FontLoader();
-		loader.load( '../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
+		loader.load( '../../Lib/fonts/' + fontName + '_' + fontWeight + '.typeface.json', function ( response ) {
 			font = response;
 			//refreshText();
 			var text1 = "Text example";
@@ -257,7 +257,7 @@
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, markerRoot2, {
 		type : 'pattern',
 		// patternUrl : '../../data/data/patt.hiro',
-		patternUrl : '../Lib/data/patt.kanji',
+		patternUrl : '../../Lib/data/patt.kanji',
 	})
 </script>
 </body>
