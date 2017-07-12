@@ -12,14 +12,33 @@
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
 <canvas></canvas>
 <a href="#" id="download-photo" download="photo.png"></a>
+
 <!--<img id="snap">-->
+<script type="text/javascript">
+
+</script>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
+
+	// function myFunction(){
+	// 	var w = document.getElementById("width").value;
+ //    	var h = document.getElementById("height").value;
+	// 	arToolkitSource.domElement.style.width = w + 'px';
+	// 	arToolkitSource.domElement.style.height = h + 'px';
+	// 	arToolkitSource.domElement.videoWidth = parseInt(w);
+	// 	arToolkitSource.domElement.videoHeight = parseInt(h);
+	// }
+
+	window.addEventListener("orientationchange", function() {
+   		 alert("the orientation of the device is now " + screen.orientation.angle);
+	});
     var stats = new Stats();
     var download_photo_btn = document.querySelector('#download-photo');
     var image = document.querySelector('#snap');
+
+
 
     // init renderer
 	var markers = [];
@@ -63,10 +82,10 @@
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam 
 		sourceType : 'webcam',
-		// sourceWidth : 1920,
-		// sourceHeight : 1080,
-		// displayWidth: 1920,
-		// displayHeight: 1080
+		// sourceWidth : window.innerWidth,
+		// sourceHeight : window.innerHeight,
+		// displayWidth: window.innerWidth,
+		// displayHeight: window.innerHeight
 		
 		// // to read from an image
 		// sourceType : 'image',
@@ -181,7 +200,7 @@
 	// model
 	var mixers = [];
 	var clock = new THREE.Clock();
-
+ 
 	var manager = new THREE.LoadingManager();
 	manager.onProgress = function( item, loaded, total ) {
 		console.log( item, loaded, total );
@@ -253,6 +272,9 @@
         var width = arToolkitSource.domElement.videoWidth,
                 height = arToolkitSource.domElement.videoHeight;
 
+                // arToolkitSource.domElement.width = width;
+                // arToolkitSource.domElement.height = height;
+
         if (width && height) {
             // Setup a canvas with the same dimensions as the video.
             hidden_canvas.width = width;
@@ -274,5 +296,9 @@
 
 
 </script>
-
+<!-- <div style="position: absolute; left: 30px;">
+<input type="number" id="width" value="640">
+<input type="number" id="height" value="480">
+<button type="button" onclick="myFunction()">Update</button>
+</div> -->
 </body>
