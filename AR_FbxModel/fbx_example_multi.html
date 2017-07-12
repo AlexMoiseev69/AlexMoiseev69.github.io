@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0, minimal-ui">
 <!-- three.js library -->
-<script src='../Lib/utils/three.min.js'></script>
+<script src='Lib/utils/three.min.js'></script>
 <!-- ar.js -->
-<script src="../Lib/ar/ar.js"></script>
-<script src="../Lib/loaders/FBXLoader.js"></script>
-<script src="../Lib/utils/stats.min.js"></script>
-<script src="../Lib/loaders/inflate.min.js"></script> <!-- FBX -->
+<script src="Lib/ar/ar.js"></script>
+<script src="Lib/loaders/FBXLoader.js"></script>
+<script src="Lib/utils/stats.min.js"></script>
+<script src="Lib/loaders/inflate.min.js"></script> <!-- FBX -->
 <!-- <script>THREEx.ArToolkitContext.baseURL = '../../lib/ar'</script> -->
 
 <body style='margin : 0px; overflow: hidden; font-family: Monospace;'>
@@ -63,10 +63,10 @@
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam 
 		sourceType : 'webcam',
-		sourceWidth : 1920,
-		sourceHeight : 1080,
-		displayWidth: 1920,
-		displayHeight: 1080
+		// sourceWidth : 1920,
+		// sourceHeight : 1080,
+		// displayWidth: 1920,
+		// displayHeight: 1080
 		
 		// // to read from an image
 		// sourceType : 'image',
@@ -99,7 +99,7 @@
 
 	// create atToolkitContext
 	var arToolkitContext = new THREEx.ArToolkitContext({
-		cameraParametersUrl: '../Lib/data/camera_para.dat',
+		cameraParametersUrl: 'data/camera_para.dat',
 		detectionMode: 'mono',
 	})
 	// initialize it
@@ -123,8 +123,8 @@
 	////////////////////////////////////////////////////////////////////////////////
 	
 	// init controls for camera
-	var marker1 = createMarker("marker1", "../Lib/data/patt.hiro")
-	var marker2 = createMarker("marker2", "../Lib/data/patt.kanji")
+	var marker1 = createMarker("marker1", "data/patt.hiro")
+	var marker2 = createMarker("marker2", "data/patt.kanji")
 
 	//  new THREEx.ArMarkerControls(arToolkitContext, camera, {
 	// 	type : 'pattern',
