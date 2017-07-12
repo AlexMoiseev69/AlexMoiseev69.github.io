@@ -75,7 +75,7 @@
 	})
 	function onResize(){
 		arToolkitSource.onResize()	
-		arToolkitSource.copySizeTo(renderer.domElement)	
+		// arToolkitSource.copySizeTo(renderer.domElement)	
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas)	
 		}	
