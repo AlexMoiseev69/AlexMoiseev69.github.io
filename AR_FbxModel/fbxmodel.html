@@ -23,7 +23,7 @@
 		preserveDrawingBuffer: true
 	});
 	renderer.setClearColor(new THREE.Color('lightgrey'), 0)
-	renderer.setSize( 1920, 1080 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 	renderer.domElement.style.position = 'absolute'
 	renderer.domElement.style.top = '0px'
 	renderer.domElement.style.left = '0px'
@@ -78,7 +78,7 @@
 	function onResize(){
 		alert("resize!");
 		arToolkitSource.onResize();	
-		arToolkitSource.copySizeTo(renderer.domElement);
+		// arToolkitSource.copySizeTo(renderer.domElement);
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
 		}	
