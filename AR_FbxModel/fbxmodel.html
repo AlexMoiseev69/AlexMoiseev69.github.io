@@ -16,6 +16,16 @@
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
 
+	window.addEventListener("orientationchange", function() {
+		if(screen.orientation.angle !== 90 || screen.orientation.angle !== 270){
+			renderer.setSize(window.innerWidth, window.innerHeight);
+		}
+		else{
+			renderer.setSize(window.innerHeight, window.innerWidth);
+		}
+   		alert("the orientation of the device is now " + screen.orientation.angle);
+	});
+		
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		antialias: true,
@@ -78,7 +88,7 @@
 	function onResize(){
 		// alert("resize!");
 		arToolkitSource.onResize();	
-		renderer.setSize(window.innerWidth, window.innerHeight);
+		console.log(screen.orientation);
 		// arToolkitSource.copySizeTo(renderer.domElement);
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
