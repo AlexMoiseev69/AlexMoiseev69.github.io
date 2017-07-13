@@ -16,6 +16,20 @@
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
 		
+window.addEventListener("orientationchange", function() {
+	var w = arToolkitSource.domElement.videoWidth;
+	var h = arToolkitSource.domElement.videoHeight;
+	arToolkitSource.domElement.videoWidth = h;
+	arToolkitSource.domElement.videoHeight = w;
+	// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
+
+	// }
+	// else{
+	// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
+	// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
+	// }
+});
+
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
 		antialias: true,
@@ -76,22 +90,14 @@
 		onResize()
 	})
 
-	// var orientation = 0;
+	var orientation = 0;
 	function onResize(){
-		// var w = arToolkitSource.domElement.videoWidth;
-		// var h = arToolkitSource.domElement.videoHeight;
 
-		// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
-		// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
-		// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
-		// }
-		// else{
-		// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
-		// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
-		// }
-		// orientation = screen.orientation.angle;
-		// alert("resize!");
-		// console.log(screen.orientation);
+
+
+		orientation = screen.orientation.angle;
+		alert("resize!");
+		console.log(screen.orientation);
 		arToolkitSource.onResize();	
 		arToolkitSource.copySizeTo(renderer.domElement);
 
