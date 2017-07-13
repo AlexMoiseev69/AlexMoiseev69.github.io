@@ -89,21 +89,21 @@
 		// alert("resize!");
 		// console.log(screen.orientation);
 		arToolkitSource.onResize();	
-		// arToolkitSource.copySizeTo(renderer.domElement);
-   		alert("the orientation of the device is now " + orientation);
-		if(orientation===0)
-		{
-			renderer.domElement.style.width = arToolkitSource.domElement.style.width;
-			renderer.domElement.style.height = arToolkitSource.domElement.style.height;
-			renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
-			renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
-		}
-		else{
-			renderer.domElement.style.width = arToolkitSource.domElement.style.height;
-			renderer.domElement.style.height = arToolkitSource.domElement.style.width;
-			renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
-			renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
-		}
+		arToolkitSource.copySizeTo(renderer.domElement);
+  //  		alert("the orientation of the device is now " + orientation);
+		// if(orientation===0)
+		// {
+		// 	renderer.domElement.style.width = arToolkitSource.domElement.style.width;
+		// 	renderer.domElement.style.height = arToolkitSource.domElement.style.height;
+		// 	renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
+		// 	renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
+		// }
+		// else{
+		// 	renderer.domElement.style.width = arToolkitSource.domElement.style.height;
+		// 	renderer.domElement.style.height = arToolkitSource.domElement.style.width;
+		// 	renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
+		// 	renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
+		// }
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
 		}	
