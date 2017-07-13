@@ -15,15 +15,15 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
-
+	var orientation = 0;
 	window.addEventListener("orientationchange", function() {
 		if(screen.orientation.angle !== 90 || screen.orientation.angle !== 270){
-			renderer.setSize(window.innerWidth, window.innerHeight);
+			orientation = 0;
 		}
 		else{
-			renderer.setSize(window.innerHeight, window.innerWidth);
+			orientation = 1;
 		}
-   		alert("the orientation of the device is now " + screen.orientation.angle);
+   		// alert("the orientation of the device is now " + screen.orientation.angle);
 	});
 		
 	// init renderer
@@ -87,9 +87,22 @@
 	})
 	function onResize(){
 		// alert("resize!");
+		// console.log(screen.orientation);
 		arToolkitSource.onResize();	
-		console.log(screen.orientation);
 		// arToolkitSource.copySizeTo(renderer.domElement);
+		if(orientation===0)
+		{
+			renderer.domElement.style.width = arToolkitSource.domElement.style.width;
+			renderer.domElement.style.height = arToolkitSource.domElement.style.height;
+			renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
+			renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
+		}
+		else{
+			renderer.domElement.style.width = arToolkitSource.domElement.style.height;
+			renderer.domElement.style.height = arToolkitSource.domElement.style.width;
+			renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginTop;
+			renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginLeft;
+		}
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
 		}	
@@ -127,7 +140,7 @@
 	// init controls for camera
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
 		type : 'pattern',
-		patternUrl : 'data/itmo.patt',
+		patternUrl : 'data/patt.hiro',
 		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
 		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
 		changeMatrixMode: 'cameraTransformMatrix'
