@@ -16,20 +16,20 @@
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
 		
-window.addEventListener("orientationchange", function() {
-	var w = arToolkitSource.domElement.videoWidth;
-	var h = arToolkitSource.domElement.videoHeight;
-	arToolkitSource.domElement.videoWidth = h;
-	arToolkitSource.domElement.videoHeight = w;
-	alert("resize!" +  arToolkitSource.domElement.videoWidth + " - > < - " + arToolkitSource.domElement.videoHeight);
-	// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
+// window.addEventListener("orientationchange", function() {
+// 	var w = arToolkitSource.domElement.videoWidth;
+// 	var h = arToolkitSource.domElement.videoHeight;
+// 	arToolkitSource.domElement.videoWidth = h;
+// 	arToolkitSource.domElement.videoHeight = w;
+// 	alert("resize!" +  arToolkitSource.domElement.videoWidth + " - > < - " + arToolkitSource.domElement.videoHeight);
+// 	// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
 
-	// }
-	// else{
-	// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
-	// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
-	// }
-});
+// 	// }
+// 	// else{
+// 	// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
+// 	// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
+// 	// }
+// });
 
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
@@ -98,7 +98,9 @@ window.addEventListener("orientationchange", function() {
 
 
 		arToolkitSource.onResize();	
-		arToolkitSource.copySizeTo(renderer.domElement);
+		changeSize(renderer.domElement, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
+		renderer.setSize( renderer.domElement.clientWidth, renderer.domElement.clientHeight );
+		// arToolkitSource.copySizeTo(renderer.domElement);
 
 
 
@@ -279,6 +281,41 @@ window.addEventListener("orientationchange", function() {
            context.clearRect(0, 0, hidden_canvas.width, hidden_canvas.height);
         }
     }
+
+    function changeSize(domElement, videoWidth, videoHeight){
+		var screenWidth = window.innerWidth
+		var screenHeight = window.innerHeight
+
+	// compute sourceWidth, sourceHeight
+		var sourceWidth = videoWidth
+		var sourceHeight = videoHeight
+		
+		// compute sourceAspect
+		var sourceAspect = sourceWidth / sourceHeight
+		// compute screenAspect
+		var screenAspect = screenWidth / screenHeight
+
+		// if screenAspect < sourceAspect, then change the width, else change the height
+		if( screenAspect < sourceAspect ){
+			// compute newWidth and set .width/.marginLeft
+			var newWidth = sourceAspect * screenHeight
+			domElement.style.width = newWidth+'px'
+			domElement.style.marginLeft = -(newWidth-screenWidth)/2+'px'
+			
+			// init style.height/.marginTop to normal value
+			domElement.style.height = screenHeight+'px'
+			domElement.style.marginTop = '0px'
+		}else{
+			// compute newHeight and set .height/.marginTop
+			var newHeight = 1 / (sourceAspect / screenWidth)
+			domElement.style.height = newHeight+'px'
+			domElement.style.marginTop = -(newHeight-screenHeight)/2+'px'
+			
+			// init style.width/.marginLeft to normal value
+			domElement.style.width = screenWidth+'px'
+			domElement.style.marginLeft = '0px'
+		}
+	}
 </script>
 
 </body>
