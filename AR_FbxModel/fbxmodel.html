@@ -21,6 +21,7 @@ window.addEventListener("orientationchange", function() {
 	var h = arToolkitSource.domElement.videoHeight;
 	arToolkitSource.domElement.videoWidth = h;
 	arToolkitSource.domElement.videoHeight = w;
+	alert("resize!" +  arToolkitSource.domElement.videoWidth + " - > < - " + arToolkitSource.domElement.videoHeight);
 	// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
 
 	// }
@@ -90,14 +91,12 @@ window.addEventListener("orientationchange", function() {
 		onResize()
 	})
 
-	var orientation = 0;
+	// var orientation = 0;
 	function onResize(){
 
 
 
-		orientation = screen.orientation.angle;
-		alert("resize!");
-		console.log(screen.orientation);
+
 		arToolkitSource.onResize();	
 		arToolkitSource.copySizeTo(renderer.domElement);
 
