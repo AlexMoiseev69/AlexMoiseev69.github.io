@@ -23,7 +23,7 @@
 		else{
 			orientation = 1;
 		}
-   		// alert("the orientation of the device is now " + screen.orientation.angle);
+
 	});
 		
 	// init renderer
@@ -90,6 +90,7 @@
 		// console.log(screen.orientation);
 		arToolkitSource.onResize();	
 		// arToolkitSource.copySizeTo(renderer.domElement);
+   		alert("the orientation of the device is now " + orientation);
 		if(orientation===0)
 		{
 			renderer.domElement.style.width = arToolkitSource.domElement.style.width;
