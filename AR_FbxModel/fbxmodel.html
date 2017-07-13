@@ -78,6 +78,7 @@
 	function onResize(){
 		// alert("resize!");
 		arToolkitSource.onResize();	
+		renderer.setSize(window.innerWidth, window.innerHeight);
 		// arToolkitSource.copySizeTo(renderer.domElement);
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
