@@ -15,16 +15,6 @@
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
-	var orientation = 0;
-	window.addEventListener("orientationchange", function() {
-		if(screen.orientation.angle !== 90 || screen.orientation.angle !== 270){
-			orientation = 0;
-		}
-		else{
-			orientation = 1;
-		}
-
-	});
 		
 	// init renderer
 	var renderer	= new THREE.WebGLRenderer({
@@ -85,11 +75,29 @@
 	window.addEventListener('resize', function(){
 		onResize()
 	})
+
+	// var orientation = 0;
 	function onResize(){
+		// var w = arToolkitSource.domElement.videoWidth;
+		// var h = arToolkitSource.domElement.videoHeight;
+
+		// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
+		// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
+		// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
+		// }
+		// else{
+		// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
+		// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
+		// }
+		// orientation = screen.orientation.angle;
 		// alert("resize!");
 		// console.log(screen.orientation);
 		arToolkitSource.onResize();	
 		arToolkitSource.copySizeTo(renderer.domElement);
+
+
+
+
   //  		alert("the orientation of the device is now " + orientation);
 		// if(orientation===0)
 		// {
@@ -141,7 +149,7 @@
 	// init controls for camera
 	var markerControls = new THREEx.ArMarkerControls(arToolkitContext, camera, {
 		type : 'pattern',
-		patternUrl : 'data/itmo_pre.patt',
+		patternUrl : 'data/itmo_vpv.patt',
 		// patternUrl : THREEx.ArToolkitContext.baseURL + '../data/data/patt.kanji',
 		// as we controls the camera, set changeMatrixMode: 'cameraTransformMatrix'
 		changeMatrixMode: 'cameraTransformMatrix'
