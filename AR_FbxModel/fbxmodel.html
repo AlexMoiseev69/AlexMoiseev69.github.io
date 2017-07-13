@@ -74,10 +74,10 @@
 	var scene	= new THREE.Scene();
 
 	light = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 1);
-	light.position.set(0, 1, 0);
+	light.position.set(0, 1, 1);
 	scene.add(light);
 	light = new THREE.DirectionalLight(0xFFFFFF, 1);
-	light.position.set(0, 1, 0);
+	light.position.set(0, 1, 1);
 	scene.add(light);
 		
 	//////////////////////////////////////////////////////////////////////////////////
@@ -268,7 +268,7 @@
 	};
 	var loader = new THREE.FBXLoader( manager );
 	loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
-		object.scale.set(0.2, 0.2, 0.2);
+		object.scale.set(0.3, 0.3, 0.3);
 		// object.rotation.set(-Math.PI/2, 0, 0);
 
 		object.mixer = new THREE.AnimationMixer( object );
