@@ -101,10 +101,10 @@
 	// init scene and camera
 	var scene	= new THREE.Scene();
 
-	light = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 0.5);
+	light = new THREE.HemisphereLight(0xFFFFFF, 0x444444, 0.7);
 	light.position.set(0, 1, 1);
 	scene.add(light);
-	light = new THREE.DirectionalLight(0xFFFFFF, 0.5);
+	light = new THREE.DirectionalLight(0xFFFFFF, 0.7);
 	light.position.set(0, 1, 1);
 	scene.add(light);
 		
@@ -246,7 +246,7 @@
 	var loader = new THREE.FBXLoader( manager );
 	
 	// loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
-	loader.load( 'models/groot_spec/Groont.FBX', function( object ) {
+	loader.load( 'models/groot_spec/GrootTableAnim_fin.fbx', function( object ) {
 		object.scale.set(0.3, 0.3, 0.3);
 		// object.rotation.set(-Math.PI/2, 0, 0);
 
