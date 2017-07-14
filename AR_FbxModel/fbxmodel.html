@@ -18,33 +18,42 @@
     apiId: 6112732
   });
 
-  VK.Auth.login(function(response) {
-  if (response.session) {
-    /* User is authorized successfully */
-    console.log("log successfully");
-    if (response.settings) {
-      /* Selected user access settings, if they were requested */
-    }
-  } else {
-    /* User clicked Cancel button in the authorization window */
-  }
-});
+
   function uploadPhoto(files){
   	VK.init({
     	apiId: 6112732
+  	}, function(){
+	  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
+		    urlUpload = data.response.upload_url;
+		    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
+		    	console.log(data1);
+			})
+		});
   	});
 
-  	VK.Auth.login(function(response) {})
-  	var urlUpload = "";
- //  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
-	//     urlUpload = data.response.upload_url;
-	//     VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
-	//     	console.log(data1);
-	// 	})
-	// });
-	VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
-	    console.log(data.response);
+  	VK.Auth.login(function(response) {
+	  if (response.session) {
+	    /* User is authorized successfully */
+	    console.log("log successfully");
+  		var response = VK.api('photos.getWallUploadServer', {}, function(data) {
+		    urlUpload = data.response.upload_url;
+		    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
+		    	console.log(data1);
+			})
+		});
+	    if (response.settings) {
+	      /* Selected user access settings, if they were requested */
+	    }
+	  } else {
+	    /* User clicked Cancel button in the authorization window */
+	  }
 	});
+  	// VK.Auth.login(function(response) {})
+  	var urlUpload = "";
+
+	// VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
+	//     console.log(data.response);
+	// });
   }
 
 
@@ -153,7 +162,7 @@
 
 		arToolkitSource.onResize();	
 		// changeSize(renderer.domElement, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
-		renderer.setSize( renderer.domElement.clientWidth, renderer.domElement.clientHeight );
+		// renderer.setSize( renderer.domElement.clientWidth, renderer.domElement.clientHeight );
 		arToolkitSource.copySizeTo(renderer.domElement);
 
 
@@ -299,15 +308,15 @@
 	};
 	var loader = new THREE.FBXLoader( manager );
 	
-	loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
-	// loader.load( 'models/Table.fbx', function( object ) {
+	// loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
+	loader.load( 'models/groot_spec/GrootTableAnim.fbx', function( object ) {
 		object.scale.set(0.3, 0.3, 0.3);
 		// object.rotation.set(-Math.PI/2, 0, 0);
 
 		object.mixer = new THREE.AnimationMixer( object );
 		mixers.push( object.mixer );
-		if(object.animations.length > 0 ) {
-			var action = object.mixer.clipAction( object.animations[ 0 ] );
+		for(var i = 0; i < object.animations.length; i++ ) {
+			var action = object.mixer.clipAction( object.animations[ i ] );
 			action.play();
 		}
 
