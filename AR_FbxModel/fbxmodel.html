@@ -33,7 +33,7 @@
   	VK.api('photos.getWallUploadServer', {}, function(data) {
 	    var urlUpload = data.response.upload_url;
 	    var user_id = getParameterByName("user_id");
-	    VK.api('photos.saveWallPhoto', {"server" : urlUpload, "photo" : file, "user_id":13655594}, function(data1) {
+	    VK.api('photos.saveWallPhoto', {server: urlUpload, photo:file, user_id:13655594}, function(data1) {
 	    	console.log(data1);
 		})
 	});
