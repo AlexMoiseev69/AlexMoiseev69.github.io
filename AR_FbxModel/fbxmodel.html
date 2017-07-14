@@ -13,27 +13,38 @@
 <a href="#" id="download-photo" download="photo.png"></a>
 
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
-	<script type="text/javascript">
-	  VK.init({
-	    apiId: 6112732
-	  });
+<script type="text/javascript">
+  VK.init({
+    apiId: 6112732
+  });
 
-	  VK.Auth.login(function(response) {
-	  if (response.session) {
-	    /* User is authorized successfully */
-	    console.log("log successfully");
-	    if (response.settings) {
-	      /* Selected user access settings, if they were requested */
-	    }
-	  } else {
-	    /* User clicked Cancel button in the authorization window */
-	  }
+  VK.Auth.login(function(response) {
+  if (response.session) {
+    /* User is authorized successfully */
+    console.log("log successfully");
+    if (response.settings) {
+      /* Selected user access settings, if they were requested */
+    }
+  } else {
+    /* User clicked Cancel button in the authorization window */
+  }
+});
+  function uploadPhoto(files){
+  	var urlUpload = "";
+  	var response = VK.api('photos.getUploadServer', {album_id: 31148913}, function(data) {
+	    urlUpload = response.upload_url;
+	    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
+	    	console.log(data1);
+		})
 	});
+  }
 
-    VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
-        console.log(data.response);
-    });
-	</script>
+
+
+// VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
+//     console.log(data.response);
+// });
+</script>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
 	//		Init
@@ -135,9 +146,9 @@
 
 
 		arToolkitSource.onResize();	
-		changeSize(renderer.domElement, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
+		// changeSize(renderer.domElement, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
 		renderer.setSize( renderer.domElement.clientWidth, renderer.domElement.clientHeight );
-		// arToolkitSource.copySizeTo(renderer.domElement);
+		arToolkitSource.copySizeTo(renderer.domElement);
 
 
 
@@ -281,7 +292,9 @@
 		console.error( xhr );
 	};
 	var loader = new THREE.FBXLoader( manager );
+	
 	loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
+	// loader.load( 'models/Table.fbx', function( object ) {
 		object.scale.set(0.3, 0.3, 0.3);
 		// object.rotation.set(-Math.PI/2, 0, 0);
 
@@ -315,44 +328,45 @@
             // Turn the canvas image into a dataURL that can be used as a src for our photo.
             download_photo_btn.href = hidden_canvas.toDataURL('image/png');
             download_photo_btn.click();
+            uploadPhoto([download_photo_btn.href]);
            context.clearRect(0, 0, hidden_canvas.width, hidden_canvas.height);
         }
     }
 
-    function changeSize(domElement, videoWidth, videoHeight){
-		var screenWidth = window.innerWidth
-		var screenHeight = window.innerHeight
+ //    function changeSize(domElement, videoWidth, videoHeight){
+	// 	var screenWidth = window.innerWidth
+	// 	var screenHeight = window.innerHeight
 
-	// compute sourceWidth, sourceHeight
-		var sourceWidth = videoWidth
-		var sourceHeight = videoHeight
+	// // compute sourceWidth, sourceHeight
+	// 	var sourceWidth = videoWidth
+	// 	var sourceHeight = videoHeight
 		
-		// compute sourceAspect
-		var sourceAspect = sourceWidth / sourceHeight
-		// compute screenAspect
-		var screenAspect = screenWidth / screenHeight
+	// 	// compute sourceAspect
+	// 	var sourceAspect = sourceWidth / sourceHeight
+	// 	// compute screenAspect
+	// 	var screenAspect = screenWidth / screenHeight
 
-		// if screenAspect < sourceAspect, then change the width, else change the height
-		if( screenAspect < sourceAspect ){
-			// compute newWidth and set .width/.marginLeft
-			var newWidth = sourceAspect * screenHeight
-			domElement.style.width = newWidth+'px'
-			domElement.style.marginLeft = -(newWidth-screenWidth)/2+'px'
+	// 	// if screenAspect < sourceAspect, then change the width, else change the height
+	// 	if( screenAspect < sourceAspect ){
+	// 		// compute newWidth and set .width/.marginLeft
+	// 		var newWidth = sourceAspect * screenHeight
+	// 		domElement.style.width = newWidth+'px'
+	// 		domElement.style.marginLeft = -(newWidth-screenWidth)/2+'px'
 			
-			// init style.height/.marginTop to normal value
-			domElement.style.height = screenHeight+'px'
-			domElement.style.marginTop = '0px'
-		}else{
-			// compute newHeight and set .height/.marginTop
-			var newHeight = 1 / (sourceAspect / screenWidth)
-			domElement.style.height = newHeight+'px'
-			domElement.style.marginTop = -(newHeight-screenHeight)/2+'px'
+	// 		// init style.height/.marginTop to normal value
+	// 		domElement.style.height = screenHeight+'px'
+	// 		domElement.style.marginTop = '0px'
+	// 	}else{
+	// 		// compute newHeight and set .height/.marginTop
+	// 		var newHeight = 1 / (sourceAspect / screenWidth)
+	// 		domElement.style.height = newHeight+'px'
+	// 		domElement.style.marginTop = -(newHeight-screenHeight)/2+'px'
 			
-			// init style.width/.marginLeft to normal value
-			domElement.style.width = screenWidth+'px'
-			domElement.style.marginLeft = '0px'
-		}
-	}
+	// 		// init style.width/.marginLeft to normal value
+	// 		domElement.style.width = screenWidth+'px'
+	// 		domElement.style.marginLeft = '0px'
+	// 	}
+	// }
 </script>
 
 </body>
