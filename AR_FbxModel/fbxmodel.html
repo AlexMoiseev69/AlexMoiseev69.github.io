@@ -132,10 +132,10 @@
 	var arToolkitSource = new THREEx.ArToolkitSource({
 		// to read from the webcam 
 		sourceType : 'webcam',
-		sourceWidth : 1280,
-		sourceHeight : 960,
-		displayWidth: 1280,
-		displayHeight: 960
+		sourceWidth : 1024,
+		sourceHeight : 768,
+		displayWidth: 1024,
+		displayHeight: 768
 		// // to read from an image
 		// sourceType : 'image',
 		// sourceUrl : THREEx.ArToolkitContext.baseURL + '../data/images/img.jpg',		
@@ -309,7 +309,7 @@
 	var loader = new THREE.FBXLoader( manager );
 	
 	// loader.load( 'models/groot_spec/GrootDiff_spec.fbx', function( object ) {
-	loader.load( 'models/groot_spec/GrootTable.fbx', function( object ) {
+	loader.load( 'models/groot_spec/GrootTableAnim.fbx', function( object ) {
 		object.scale.set(0.3, 0.3, 0.3);
 		// object.rotation.set(-Math.PI/2, 0, 0);
 
