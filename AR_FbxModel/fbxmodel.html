@@ -36,19 +36,20 @@
 
   	VK.Auth.login(function(response) {})
   	var urlUpload = "";
-  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
-	    urlUpload = data.response.upload_url;
-	    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
-	    	console.log(data1);
-		})
+ //  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
+	//     urlUpload = data.response.upload_url;
+	//     VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
+	//     	console.log(data1);
+	// 	})
+	// });
+	VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
+	    console.log(data.response);
 	});
   }
 
 
 
-// VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
-//     console.log(data.response);
-// });
+
 </script>
 <script>
 	//////////////////////////////////////////////////////////////////////////////////
