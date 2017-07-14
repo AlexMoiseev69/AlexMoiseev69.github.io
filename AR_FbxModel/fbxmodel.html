@@ -20,43 +20,58 @@
 
 
   function uploadPhoto(file){
-  	VK.init({
-    	apiId: 6112732
-  	}, function(){
-	  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
-		    urlUpload = data.response.upload_url;
-		    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
-		    	console.log(data1);
-			})
-		});
-  	});
-
-  	VK.Auth.login(function(response) {
-	  if (response.session) {
-	    /* User is authorized successfully */
-	    console.log("log successfully");
-  		var response = VK.api('photos.getWallUploadServer', {}, function(data) {
-		    urlUpload = data.response.upload_url;
-		    VK.api('photos.saveWallPhoto', {"server" : urlUpload, "photo" : file}, function(data1) {
-		    	console.log(data1);
-			})
-		});
-	    if (response.settings) {
-	      /* Selected user access settings, if they were requested */
-	    }
-	  } else {
-	    /* User clicked Cancel button in the authorization window */
-	  }
+  // 	VK.init({
+  //   	apiId: 6112732
+  // 	}, function(){
+	 //  	var response = VK.api('photos.getWallUploadServer', {}, function(data) {
+		//     urlUpload = data.response.upload_url;
+		//     VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
+		//     	console.log(data1);
+		// 	})
+		// });
+  // 	});
+  	VK.api('photos.getWallUploadServer', {}, function(data) {
+	    var urlUpload = data.response.upload_url;
+	    var user_id = getParameterByName("user_id");
+	    VK.api('photos.saveWallPhoto', {"server" : urlUpload, "photo" : file, "user_id":13655594}, function(data1) {
+	    	console.log(data1);
+		})
 	});
+
+ //  	VK.Auth.login(function(response) {
+	//   if (response.session) {
+	//     /* User is authorized successfully */
+	//     console.log("log successfully");
+ //  		var response = VK.api('photos.getWallUploadServer', {}, function(data) {
+	// 	    urlUpload = data.response.upload_url;
+	// 	    VK.api('photos.saveWallPhoto', {"server" : urlUpload, "photo" : file, "user_id":13655594}, function(data1) {
+	// 	    	console.log(data1);
+	// 		})
+	// 	});
+	//     if (response.settings) {
+	//       /* Selected user access settings, if they were requested */
+	//     }
+	//   } else {
+	//     /* User clicked Cancel button in the authorization window */
+	//   }
+	// });
   	// VK.Auth.login(function(response) {})
-  	var urlUpload = "";
+  	// var urlUpload = "";
 
 	// VK.api('wall.post', {owner_id: '13655594', message: "Hey man!"}, function(data) {
 	//     console.log(data.response);
 	// });
   }
 
-
+	function getParameterByName(name, url) {
+		if (!url) url = window.location.href;
+		name = name.replace(/[\[\]]/g, "\\$&");
+		var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+		    results = regex.exec(url);
+		if (!results) return null;
+		if (!results[2]) return '';
+		return decodeURIComponent(results[2].replace(/\+/g, " "));
+	}
 
 
 </script>
