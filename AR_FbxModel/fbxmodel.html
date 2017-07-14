@@ -12,6 +12,7 @@
 <canvas></canvas>
 <a href="#" id="download-photo" download="photo.png"></a>
 
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 <script src="//vk.com/js/api/openapi.js" type="text/javascript"></script>
 <script type="text/javascript">
   VK.init({
@@ -23,9 +24,21 @@
   	VK.api('photos.getWallUploadServer', {}, function(data) {
 	    var urlUpload = data.response.upload_url;
 	    var user_id = getParameterByName("user_id");
-	    VK.api('photos.saveWallPhoto', {server: user_id, photos_list:[{photo: file}], user_id:user_id}, function(data1) {
-	    	console.log(data1);
-		})
+	    $.ajax({
+		  type: "POST",
+		  url: urlUpload,
+		  data: file,
+		  success: function(data){
+			  	console.log(data);
+			  	var server = data.server;
+			  	var photos_list = data.photos_list;
+			  	var hash = data.hash;
+		  		VK.api('photos.saveWallPhoto', {server: server, photos_list:photos_list, hash:hash}, function(data1) {
+	    			console.log(data1);
+				});
+			},
+		});
+	    
 	});
   }
 
