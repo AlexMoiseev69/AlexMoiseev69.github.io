@@ -33,7 +33,7 @@
   	VK.api('photos.getWallUploadServer', {}, function(data) {
 	    var urlUpload = data.response.upload_url;
 	    var user_id = getParameterByName("user_id");
-	    VK.api('photos.saveWallPhoto', {server: urlUpload, photo:[{photo: file,sizes:[[s,123456852,15e88,01qMnm6kJ-U,56,75],[m,123456852,15e89,Y9BJ8lGrL_0,97,130],[x,123456852,15e8a,wVmxGPX0i88,453,604],[y,123456852,15e8b,ZGgaSculk1E,605,807],[z,123456852,15e8c,yl_hClRMfG8,810,1080],[w,123456852,15e8d,J1uuxjwvAKQ,1620,2160],[o,123456852,15e8e,r5KpmV_5EPM,130,173],[p,123456852,15e8f,vUIVbZdbRp0,200,267],[q,123456852,15e90,m_wtVnGD6BQ,320,427],[r,123456852,15e91,YGElZzBgEIM,510,680]],kid:95574768563a263c4a275f4af50a9425,debug:xswmwxwywzwwwowpwqwrw, user_id:13655594}], function(data1) {
+	    VK.api('photos.saveWallPhoto', {server: urlUpload, photo:[{photo: file}], user_id:13655594], function(data1) {
 	    	console.log(data1);
 		})
 	});
