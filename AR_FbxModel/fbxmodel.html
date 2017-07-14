@@ -55,13 +55,15 @@
 // });
 
 	// init renderer
-	screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
+	// screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
 
-	if (screen.lockOrientationUniversal("landscape-primary")) {
-	// orientation was locked
-	} else {
-	// orientation lock failed
-	}
+	// if (screen.lockOrientationUniversal("landscape-primary")) {
+	// // orientation was locked
+	// } else {
+	// // orientation lock failed
+	// }
+	// screen.lockOrientation('landscape');
+	screen.orientation.lock();
 	var renderer	= new THREE.WebGLRenderer({
 		antialias: true,
 		alpha: true,
