@@ -36,7 +36,7 @@
 
   	VK.Auth.login(function(response) {})
   	var urlUpload = "";
-  	var response = VK.api('photos.getUploadServer', {album_id: 31148913}, function(data) {
+  	var response = VK.api('photos.getUploadServer', {album_id: 140289167}, function(data) {
 	    urlUpload = data.response.upload_url;
 	    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
 	    	console.log(data1);
