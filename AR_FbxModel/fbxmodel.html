@@ -30,9 +30,14 @@
   }
 });
   function uploadPhoto(files){
+  	VK.init({
+    	apiId: 6112732
+  	});
+
+  	VK.Auth.login(function(response) {})
   	var urlUpload = "";
   	var response = VK.api('photos.getUploadServer', {album_id: 31148913}, function(data) {
-	    urlUpload = response.upload_url;
+	    urlUpload = data.response.upload_url;
 	    VK.api('photo.save', {"server" : urlUpload, "photos_list" : files}, function(data1) {
 	    	console.log(data1);
 		})
