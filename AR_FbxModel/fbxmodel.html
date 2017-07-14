@@ -65,30 +65,6 @@
 	//		Init
 	//////////////////////////////////////////////////////////////////////////////////
 		
-// window.addEventListener("orientationchange", function() {
-// 	var w = arToolkitSource.domElement.videoWidth;
-// 	var h = arToolkitSource.domElement.videoHeight;
-// 	arToolkitSource.domElement.videoWidth = h;
-// 	arToolkitSource.domElement.videoHeight = w;
-// 	alert("resize!" +  arToolkitSource.domElement.videoWidth + " - > < - " + arToolkitSource.domElement.videoHeight);
-// 	// if(screen.orientation.angle === 90 || screen.orientation.angle === 270){
-
-// 	// }
-// 	// else{
-// 	// 	arToolkitSource.domElement.videoWidth = video.videoWidth;
-// 	// 	arToolkitSource.domElement.videoHeight = video.videoHeight;
-// 	// }
-// });
-
-	// init renderer
-	// screen.lockOrientationUniversal = screen.lockOrientation || screen.mozLockOrientation || screen.msLockOrientation;
-
-	// if (screen.lockOrientationUniversal("landscape-primary")) {
-	// // orientation was locked
-	// } else {
-	// // orientation lock failed
-	// }
-	// screen.lockOrientation('landscape');
 	window.addEventListener("orientationchange",function(){
 	 	event.stopPropagation();
 	}); 
@@ -156,32 +132,9 @@
 
 	// var orientation = 0;
 	function onResize(){
-
-
-
-
 		arToolkitSource.onResize();	
-		// changeSize(renderer.domElement, arToolkitSource.domElement.videoWidth, arToolkitSource.domElement.videoHeight);
-		// renderer.setSize( renderer.domElement.clientWidth, renderer.domElement.clientHeight );
 		arToolkitSource.copySizeTo(renderer.domElement);
 
-
-
-
-  //  		alert("the orientation of the device is now " + orientation);
-		// if(orientation===0)
-		// {
-		// 	renderer.domElement.style.width = arToolkitSource.domElement.style.width;
-		// 	renderer.domElement.style.height = arToolkitSource.domElement.style.height;
-		// 	renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
-		// 	renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
-		// }
-		// else{
-		// 	renderer.domElement.style.width = arToolkitSource.domElement.style.height;
-		// 	renderer.domElement.style.height = arToolkitSource.domElement.style.width;
-		// 	renderer.domElement.style.marginLeft = arToolkitSource.domElement.style.marginLeft;
-		// 	renderer.domElement.style.marginTop = arToolkitSource.domElement.style.marginTop;
-		// }
 		if( arToolkitContext.arController !== null ){
 			arToolkitSource.copySizeTo(arToolkitContext.arController.canvas);
 		}	
@@ -231,10 +184,6 @@
 	//		add an object in the scene
 	//////////////////////////////////////////////////////////////////////////////////
 
-	
-	// onRenderFcts.push(function(delta){
-	// 	mesh.rotation.x += Math.PI*delta
-	// })
 
 	//////////////////////////////////////////////////////////////////////////////////
 	//		render the whole thing on the page
@@ -250,11 +199,7 @@
 	requestAnimationFrame(function animate(nowMsec){
 		// keep looping
 		requestAnimationFrame( animate );
-		// // measure time
-		// lastTimeMsec	= lastTimeMsec || nowMsec-1000/60
-		// var deltaMsec	= Math.min(200, nowMsec - lastTimeMsec)
-		// lastTimeMsec	= nowMsec
-		// call each update function
+
 
 		if ( mixers!=null && mixers.length > 0 ) {
 			for ( var i = 0; i < mixers.length; i ++ ) {
@@ -266,29 +211,6 @@
 		})
 	})
 
-// TEST
-// add a torus knot	
-	// var geometry	= new THREE.CubeGeometry(1,1,1);
-	// var material	= new THREE.MeshNormalMaterial({
-	// 	transparent : true,
-	// 	opacity: 0.5,
-	// 	side: THREE.DoubleSide
-	// }); 
-	// var mesh	= new THREE.Mesh( geometry, material );
-	// mesh.position.y	= geometry.parameters.height/2
-	// scene.add( mesh );
-	
-	// var geometry	= new THREE.TorusKnotGeometry(0.3,0.1,64,16);
-	// var material	= new THREE.MeshNormalMaterial(); 
-	// var mesh	= new THREE.Mesh( geometry, material );
-	// mesh.position.y	= 0.5
-	// scene.add( mesh );
-	
-	// onRenderFcts.push(function(delta){
-	// 	mesh.rotation.x += Math.PI*delta
-	// })
-
-//-----------
 	// model
 	var mixers = [];
 	var clock = new THREE.Clock();
@@ -343,7 +265,7 @@
             // Turn the canvas image into a dataURL that can be used as a src for our photo.
             download_photo_btn.href = hidden_canvas.toDataURL('image/png');
             download_photo_btn.click();
-            // uploadPhoto([download_photo_btn.href]);
+            uploadPhoto([download_photo_btn.href]);
            context.clearRect(0, 0, hidden_canvas.width, hidden_canvas.height);
         }
     }
